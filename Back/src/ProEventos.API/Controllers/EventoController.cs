@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProEventos.API.Data;
 using ProEventos.API.Models;
 
 namespace ProEventos.API.Controllers
@@ -12,48 +13,29 @@ namespace ProEventos.API.Controllers
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-        public IEnumerable<Evento> _evento = new Evento[]{
-            new Evento(){                
-                EventoId = 1,
-                Tema = "Angular 11 e .NET 5",
-                Local = "São Paulo",
-                Lote = "1ª Lote",
-                QtdPessoas = 250,
-                DataEvento = DateTime.Now.AddDays(13).ToString("dd/MM/yyyy"),
-                ImagemUrl = "foto.png"
-                },
+        private readonly DataContext _context;
 
-                new Evento(){
-                EventoId = 2,
-                Tema = "SQL SERVER",
-                Local = "São Paulo",
-                Lote = "1ª Lote",
-                QtdPessoas = 350,
-                DataEvento = DateTime.Now.AddDays(13).ToString("dd/MM/yyyy"),
-                ImagemUrl = "fotoSQL.png"
-                }
-            };
-    
-
-        public EventoController()
-        {            
+        public EventoController(DataContext context)
+        {
+            _context = context;
         }
 
         [HttpGet]
         public IEnumerable<Evento> Get()
-        {   
-            return _evento;
+        {
+            return _context.Eventos;
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<Evento> GetById(int id){
-            return _evento.Where(evento => evento.EventoId == id);
+        public IEnumerable<Evento> GetById(int id)
+        {
+            return _context.Eventos.Where(evento => evento.EventoId == id);
         }
-        
+
         [HttpPost]
         public string Post()
         {
-            return "Retornando Post";      
+            return "Retornando Post";
         }
 
         [HttpPut("{id}")]
