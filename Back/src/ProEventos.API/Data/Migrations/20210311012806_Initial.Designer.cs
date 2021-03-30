@@ -9,7 +9,7 @@ using ProEventos.API.Data;
 namespace ProEventos.API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210308230810_Initial")]
+    [Migration("20210311012806_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,6 +48,30 @@ namespace ProEventos.API.Data.Migrations
                     b.HasKey("EventoId");
 
                     b.ToTable("Eventos");
+                });
+
+            modelBuilder.Entity("ProEventos.API.Models.TecnologiasMercado", b =>
+                {
+                    b.Property<int>("TecnologiaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Links")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TecnologiaId");
+
+                    b.ToTable("Tecnologias");
                 });
 #pragma warning restore 612, 618
         }

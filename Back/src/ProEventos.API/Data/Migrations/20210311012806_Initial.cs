@@ -23,12 +23,31 @@ namespace ProEventos.API.Data.Migrations
                 {
                     table.PrimaryKey("PK_Eventos", x => x.EventoId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Tecnologias",
+                columns: table => new
+                {
+                    TecnologiaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Links = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tecnologias", x => x.TecnologiaId);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Eventos");
+
+            migrationBuilder.DropTable(
+                name: "Tecnologias");
         }
     }
 }

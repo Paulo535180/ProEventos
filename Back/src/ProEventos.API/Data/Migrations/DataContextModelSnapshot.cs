@@ -47,6 +47,30 @@ namespace ProEventos.API.Data.Migrations
 
                     b.ToTable("Eventos");
                 });
+
+            modelBuilder.Entity("ProEventos.API.Models.TecnologiasMercado", b =>
+                {
+                    b.Property<int>("TecnologiaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Links")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TecnologiaId");
+
+                    b.ToTable("Tecnologias");
+                });
 #pragma warning restore 612, 618
         }
     }
